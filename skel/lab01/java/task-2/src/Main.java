@@ -36,9 +36,14 @@ public class Main {
         }
 
         private double getResult() {
-            // TODO: Calculeaza sqrt(n) cu o precizie de 10^-3.
-            // Precizie de 10^(-x) inseamna |valoarea_ta - valoarea_reala| < 10^(-x).
-            return 0.0;
+            double guess = n / 2.0;
+            double epsilon = 0.001;
+
+            while (Math.abs(guess * guess - n) > epsilon) {
+                guess = 0.5 * (guess + n / guess);
+            }
+
+            return guess;
         }
     }
 

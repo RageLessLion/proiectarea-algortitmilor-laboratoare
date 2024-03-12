@@ -12,11 +12,6 @@ public class Main {
         int[] v;
         int x;
 
-        public void solve() {
-            readInput();
-            writeOutput(getResult());
-        }
-
         private void readInput() {
             try {
                 Scanner sc = new Scanner(new File(INPUT_FILE));
@@ -43,20 +38,45 @@ public class Main {
         }
 
         private int findFirst() {
-            // TODO: Cautati prima pozitie din v pe care se afla valoarea x.
-            // In cazul in care nu exista in sir, returnati -1.
-            return -1;
+            int left = 0, right = n - 1, mid, res = -1;
+            while (left <= right) {
+                mid = (left + right) / 2;
+                if (v[mid] >= x) {
+                    res = mid;
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            return (res != -1 && v[res] == x) ? res : -1;
         }
 
         private int findLast() {
-            // TODO: Cautati ultima pozitie din v pe care se afla valoarea x.
-            // In cazul in care nu exista in sir, returnati -1.
-            return -1;
+            int left = 0, right = n - 1, mid, res = -1;
+            while (left <= right) {
+                mid = (left + right) / 2;
+                if (v[mid] <= x) {
+                    res = mid;
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+            return (res != -1 && v[res] == x) ? res : -1;
         }
 
-        private int getResult() {
-            // TODO: Calculati numarul de aparitii a numarului x in vectorul v.
-            return 0;
+        private int getAnswer() {
+            int first = findFirst();
+            int last = findLast();
+            if (first == -1 || last == -1) {
+                return 0;
+            }
+            return last - first + 1;
+        }
+
+        public void solve() {
+            readInput();
+            writeOutput(getAnswer());
         }
     }
 

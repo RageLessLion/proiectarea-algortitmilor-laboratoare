@@ -40,8 +40,20 @@ public class Main {
         }
 
         private int fastPow(int base, int exponent, int mod) {
-            // TODO: Calculati (base^exponent) modulo mod in O(log exponent).
-            return 0;
+            // Calculate (base ^ exponent) % mod in O(log exponent)
+
+            int result = 1;
+
+            while (exponent > 0) {
+                if (exponent % 2 == 1) {
+                    result = (int)(((long) result * base) % mod);
+                }
+
+                base = (int)(((long) base * base) % mod);
+                exponent >>= 1;
+            }
+
+            return result;
         }
 
         private int getResult() {
